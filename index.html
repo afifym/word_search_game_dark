@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Search</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <!-- ROOT CONTAINER -->
+    <div id="container">
+      <!-- HINTS -->
+      <div id="hints">
+        <div class="hints-bg"></div>
+        <h5 class="hints-title">Word Search Game</h5>
+        <div class="add-wrapper">
+          <input type="text" placeholder="add a new word" class="add-input" />
+        </div>
+        <ul class="hints-list"></ul>
+        <h5 class="message">Find all Words</h5>
+      </div>
+      <!-- BOARD -->
+      <div id="board-wrapper">
+        <div class="board"></div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
