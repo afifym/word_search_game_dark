@@ -2,6 +2,13 @@
 // Changable Parameters
 // -----------------------------------------------
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("sw.js")
+    .then((reg) => console.log("Registered Successfuly ", reg))
+    .catch((err) => console.log("Not Registered ", err));
+}
+
 // Allowed number of words are divisble by 3
 // (3, 6, 9, 12, 18 ,..)
 const numWords = 6;
@@ -186,45 +193,33 @@ const findClearPath = (length) => {
   for (let i = 0; i < length; i++) {
     // Checks if the current cell is already occupied
     if (!isOccupied(rowStart, colStart)) {
+      path.push([rowStart, colStart]);
       if (newDirection == "right") {
         // save the cell in case it's not occupied
         // Return [] if we  exceed the board size
-        path.push([rowStart, colStart]);
         colStart++;
         if (colStart > COLS) return [];
       } else if (newDirection == "left") {
-        path.push([rowStart, colStart]);
         colStart--;
-        if (colStart < 0) return [];
       } else if (newDirection == "top") {
-        path.push([rowStart, colStart]);
         rowStart--;
-        if (rowStart < 0) return [];
       } else if (newDirection == "bottom") {
-        path.push([rowStart, colStart]);
         rowStart++;
-        if (rowStart > ROWS) return [];
       } else if (newDirection == "drt") {
-        path.push([rowStart, colStart]);
         rowStart--;
         colStart++;
-        if (rowStart < 0 || colStart > COLS) return [];
       } else if (newDirection == "drb") {
-        path.push([rowStart, colStart]);
         rowStart++;
         colStart++;
-        if (rowStart > ROWS || colStart > COLS) return [];
       } else if (newDirection == "dlt") {
-        path.push([rowStart, colStart]);
         rowStart--;
         colStart--;
-        if (rowStart < 0 || colStart < 0) return [];
       } else if (newDirection == "dlb") {
-        path.push([rowStart, colStart]);
         rowStart++;
         colStart--;
-        if (rowStart > ROWS || colStart < 0) return [];
       }
+      if (rowStart > ROWS || colStart > COLS || rowStart < 0 || colStart < 0)
+        return [];
     } else return [];
   }
   return path;
@@ -339,7 +334,7 @@ const constructBoard = () => {
 };
 
 // ---------------------------------------------------
-// Section 1 -- Handling User Input (Clicking a cell)
+// Section 2 -- Handling User Input (Clicking a cell)
 // ---------------------------------------------------
 
 // Checks if all elements of an array are equal
