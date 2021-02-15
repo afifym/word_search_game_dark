@@ -137,10 +137,10 @@ const directions = [
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-const ROWS = 12;
-const COLS = 12;
+const ROWS = 10;
+const COLS = 10;
 const addBtn = document.querySelector(".add-btn");
-const addInput = document.querySelector(".add-input");
+// const addInput = document.querySelector(".add-input");
 const hintsList = document.querySelector(".hints-list");
 const msg = document.querySelector(".message");
 const boardElement = document.querySelector(".board");
@@ -307,14 +307,17 @@ function detectLeftButton(evt) {
 const constructBoard = () => {
   // Constructs an empty board according to a number of rows and columns
   // Changing the rows and cols will require changing the widths and heights
+  const cellSize = "10%";
 
   for (let i = 0; i < ROWS; i++) {
     let newRow = document.createElement("ul");
     // Creates a new row in the board
-    newRow.setAttribute("style", `width: ${600}px; height: ${50}px;`);
+    newRow.setAttribute("style", `width: 100%; height: ${cellSize};`);
 
     for (let j = 0; j < COLS; j++) {
       let newChild = document.createElement("li");
+      newChild.setAttribute("style", `width: ${cellSize}; height: 100%;`);
+
       newChild.dataset.row = i;
       newChild.dataset.col = j;
       newChild.classList.add("cell");
@@ -439,9 +442,11 @@ const clickedCell = (e) => {
   if (e.target.classList.contains("cell-clicked")) {
     userPath = unselectPoint(userPath, row, col);
     e.target.classList.remove("cell-clicked");
+    e.target.classList.add("cell-unclicked");
   } else {
     userPath.push([row, col]);
     e.target.classList.add("cell-clicked");
+    e.target.classList.remove("cell-unclicked");
   }
 
   // Checks if the user-selected path is connected
@@ -535,22 +540,22 @@ const boardReset = () => {
   boardElement.classList.add("add-animation");
 };
 
-addInput.addEventListener("keypress", (e) => {
-  if (e.keyCode == 13) {
-    // Detects enterkey on the input
-    userNewWord = addInput.value;
-    if (correctWords.includes(userNewWord)) {
-      msg.innerHTML = "Word already placed!";
-      userNewWord = "";
-    } else if (userNewWord.length > ROWS - 2) {
-      msg.innerHTML = "Word is too long!";
-      userNewWord = "";
-    } else {
-      addInput.value = "";
-      boardReset();
-    }
-  }
-});
+// addInput.addEventListener("keypress", (e) => {
+//   if (e.keyCode == 13) {
+//     // Detects enterkey on the input
+//     userNewWord = addInput.value;
+//     if (correctWords.includes(userNewWord)) {
+//       msg.innerHTML = "Word already placed!";
+//       userNewWord = "";
+//     } else if (userNewWord.length > ROWS - 2) {
+//       msg.innerHTML = "Word is too long!";
+//       userNewWord = "";
+//     } else {
+//       addInput.value = "";
+//       boardReset();
+//     }
+//   }
+// });
 
 const constructCorrectWords = () => {
   // adds random words to the "correctWords" array
