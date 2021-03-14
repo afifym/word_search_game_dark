@@ -442,11 +442,9 @@ const clickedCell = (e) => {
   if (e.target.classList.contains("cell-clicked")) {
     userPath = unselectPoint(userPath, row, col);
     e.target.classList.remove("cell-clicked");
-    e.target.classList.add("cell-unclicked");
   } else {
     userPath.push([row, col]);
     e.target.classList.add("cell-clicked");
-    e.target.classList.remove("cell-unclicked");
   }
 
   // Checks if the user-selected path is connected
